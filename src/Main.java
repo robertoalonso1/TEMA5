@@ -1,0 +1,102 @@
+class Main {
+    //EJERCICIO 1
+    public static int signo(int x) {
+        if (x > 0) {
+            return 1;
+        } else if (x < 0) {
+            return -1;
+        }
+        return 0;
+    }
+
+    //EJERCICIO 2
+    public static String clasificarEdad(int edad) {
+        if (edad < 0) {
+            throw new IllegalArgumentException("Edad no válida");
+        }
+        if (edad < 6) {
+            return "Infancia";
+        } else if (edad < 12) {
+            return "Niñez";
+        } else if (edad < 18) {
+            return "Adolescencia";
+        } else if (edad < 25) {
+            return "Juventud";
+        } else if (edad < 60) {
+            return "Adultez";
+        } else {
+            return "Vejez";
+        }
+    }
+
+    //EJERCICIO 3
+    public static int contarPositivos(int[] datos) {
+        int contador = 0;
+        for (int i = 0; i < datos.length; i++) {
+            if (datos[i] > 0) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    //EJERCICIO 4
+    public static String calificacion(int nota) {
+        if (nota < 0 || nota > 10) {
+            throw new IllegalArgumentException("Nota no válida");
+        }
+        return switch (nota) {
+            case 0, 1, 2, 3, 4 -> "SUSPENSO";
+            case 5 -> "SUFICIENTE";
+            case 6 -> "BIEN";
+            case 7, 8 -> "NOTABLE";
+            default -> "SOBRESALIENTE";
+        };
+    }
+    //EJERCICIO 5
+    public static boolean esBisiesto(int anyo) {
+        if ((anyo % 4 == 0 && anyo % 100 != 0) || (anyo % 400 == 0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //EJERCICIO 6
+    public static String jugar(String j1, String j2) {
+        if (!esValida(j1) || !esValida(j2)) {
+            throw new IllegalArgumentException("Jugada no válida");
+        }
+
+        if (j1.equals(j2)) {
+            return "EMPATE";
+        }
+
+        if ((j1.equals("PIEDRA") && j2.equals("TIJERA")) ||
+                (j1.equals("TIJERA") && j2.equals("PAPEL")) ||
+                (j1.equals("PAPEL") && j2.equals("PIEDRA"))) {
+            return "GANA JUGADOR 1";
+        } else {
+            return "GANA JUGADOR 2";
+        }
+    }
+
+    private static boolean esValida(String jugada) {
+        return jugada.equals("PIEDRA") || jugada.equals("PAPEL") || jugada.equals("TIJERA");
+    }
+    //EJERCICIO 7
+    public static String evaluarPassword(String password) {
+        if (password == null) return "DEBIL";
+
+        int puntos = 0;
+        if (password.length() >= 8) puntos++;
+        if (password.matches(".*[A-Z].*")) puntos++;
+        if (password.matches(".*[a-z].*")) puntos++;
+        if (password.matches(".*[0-9].*")) puntos++;
+        if (password.matches(".*[^a-zA-Z0-9].*")) puntos++;
+
+        if (puntos <= 2) return "DEBIL";
+        if (puntos <= 4) return "MEDIA";
+        return "FUERTE";
+    }
+}
